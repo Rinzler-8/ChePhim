@@ -3,7 +3,7 @@ import { Button, Container, Row, Col } from "reactstrap";
 import { Formik, Field, Form } from "formik";
 import CustomInput from "./CustomInput";
 import * as Yup from "yup";
-import "./../../css/AccountForm.css";
+import "./../../css/Login.css";
 import GoogleIcon from "@mui/icons-material/Google";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import AppleIcon from "@mui/icons-material/Apple";
@@ -20,12 +20,12 @@ function LoginComponent(props) {
   let { handleLogin } = props;
   return (
     <div className="row ">
-      <div className="col" id="col1">
+      <div className="col ">
         <div className="left">
           <img alt="Sample" src={require("../../Assets/Banner/background.jpg")} />
         </div>
       </div>
-      <div className="col" id="col2">
+      <div className="col ">
         <div className="right">
           <Formik
             initialValues={{
@@ -60,27 +60,19 @@ function LoginComponent(props) {
                       offset: 1,
                       size: 7,
                     }}
+                    style={{ marginTop: 70 }}
                   >
                     <Form>
                       {/* Login */}
-                      <div className="title">
-                        <h3>THAM GIA CHÊ PHIM NGAY</h3>
-                        <hr></hr>
-                      </div>
-                      <div className="title-header">
-                        <h3>ĐĂNG NHẬP</h3>
-                        <hr></hr>
-                      </div>
-
+                      <br />
+                      <br />
+                      <h3>THAM GIA CHÊ PHIM NGAY</h3>
+                      <hr style={{ color: "red", height: "5px" }}></hr>
+                      <h3>Đăng nhập</h3>
+                      <hr style={{ color: "red", height: "6px", width: "140px" }}></hr>
                       {/* username */}
-                      <Field
-                        className="input"
-                        name="username"
-                        type="text"
-                        placeholder="Nhập Tên Đăng Nhập"
-                        label="Tên đăng nhập/Email:"
-                        component={CustomInput}
-                      />
+                      <br />
+                      <Field className="input" name="username" type="text" placeholder="Nhập Tên Đăng Nhập" label="Tên đăng nhập:" component={CustomInput} />
                       {/* password */}
 
                       <Field
@@ -92,13 +84,15 @@ function LoginComponent(props) {
                         component={CustomInput}
                       />
                       <label className="checkbox">
-                        <Field type="checkbox" name="toggle" checked={isShown} onChange={togglePassword} />
+                        <Field type="checkbox" style={{ backgroundColor: "red" }} name="toggle" checked={isShown} onChange={togglePassword} />
                         {`Hiện Mật Khẩu`}
                       </label>
 
                       {/* Submit */}
                       <Row className="button">
-                        <Button type="submit">Đăng nhập</Button>
+                        <Button color="danger" type="submit">
+                          Đăng nhập
+                        </Button>
 
                         <Row className="loginThirdParties">
                           <Col className="">Đăng nhập bằng:</Col>
@@ -115,10 +109,11 @@ function LoginComponent(props) {
                           </Col>
                         </Row>
 
-                        <Button type="button" href={"/register"}>
+                        <Button color="danger" type="button" href={"/register"}>
                           Đăng ký
                         </Button>
-                        <Link to={"/forgot"} className="link">
+                        <br />
+                        <Link to={"/forgot"} style={{ color: "red", marginTop: "50px" }}>
                           Quên mật khẩu
                         </Link>
                       </Row>

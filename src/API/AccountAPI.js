@@ -25,7 +25,7 @@ const getAccountAPIList = (filter) => {
   console.log("parameters: ", parameters);
   // Sử dụng thư viện queryString để chuyển đổi đối tượng thành các param
   // https://www.npmjs.com/package/query-string
-  let url = "accounts?" + queryString.stringify(parameters);
+  let url = "v1/accounts?" + queryString.stringify(parameters);
   // accounts?page=1&size=10
   console.log("Link url: ", url);
 
@@ -34,13 +34,13 @@ const getAccountAPIList = (filter) => {
 
 // Check exist by Email
 const getEmailExists = (email) => {
-  let url = "accounts/email/" + email;
+  let url = "v1/accounts/email/" + email;
   return api("GET", url, null);
 };
 
 // Check exist by Username
 const getUsernameExists = (username) => {
-  let url = "accounts/username/" + username;
+  let url = "v1/accounts/username/" + username;
   return api("GET", url, null);
 };
 
@@ -51,12 +51,12 @@ const addAccountNewAPI = (AccountNew) => {
 
 // Xóa Account
 const deleteAccountAPI = (id) => {
-  let url = "accounts/" + id;
+  let url = "v1/accounts/" + id;
   return api("DELETE", url, null, null);
 };
 // Update Account
 const updateAccountAPI = (id, accountUpdate) => {
-  let url = "accounts/" + id;
+  let url = "v1/accounts/" + id;
   return api("PUT", url, accountUpdate);
 };
 

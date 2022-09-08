@@ -6,7 +6,28 @@ import RegisterPage from "../Page/RegisterPage";
 import NotFoundPage from "../Page/NotFoundPage";
 // import AuthenRoute from "../AuthenRoute/AuthenRoute";
 import ForgotPasswordPage from "./../Page/ForgotPasswordPage";
-import WithAuth from "../HOC/WithAuth";
+import { AdminAuth, WithAuth, WithNav, WithoutNav } from "../HOC/AdminAuth";
+
+
+export const routes = (
+  <Routes>
+    <Route element={<WithoutNav />}>
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/register" element={<RegisterPage />} />
+    </Route>
+
+    <Route element={<WithNav />}>
+      <Route element={<AdminAuth />}>
+        <Route path="/admin" element={<AdminPage />} />
+      </Route>
+      <Route element={<WithAuth />}>
+        <Route path="/home" element={<HomePage />} />
+      </Route>
+      <Route path="*" element={<NotFoundPage />} />
+      <Route path="/forgot" element={<ForgotPasswordPage />} />
+    </Route>
+  </Routes>
+);
 
 // List route trong chương trình, Trong TH tích hợp API có thể dùng luôn
 // const routeList = [
@@ -49,20 +70,6 @@ import WithAuth from "../HOC/WithAuth";
 //     <Route path="*" element={<NotFoundPage />} />
 //   </Routes>
 // );
-
-export const routes = (
-  <Routes>
-    <Route element={<WithAuth />}>
-      <Route path="/home" element={<HomePage />} />
-      <Route path="/admin" element={<AdminPage />} />
-    </Route>
-
-    <Route path="/register" element={<RegisterPage />} />
-    <Route path="/login" element={<LoginPage />} />
-    <Route path="/forgot" element={<ForgotPasswordPage />} />
-    <Route path="*" element={<NotFoundPage />} />
-  </Routes>
-);
 
 // export const routes = {
 //   name: "Auth",

@@ -13,7 +13,7 @@ function CustomInput(props) {
       <h5 htmlFor={field.name}>{propsOther.label}</h5>
       <Input {...field} {...propsOther} />
       {/* Error Message */}
-      {touched[field.name] && errors[field.name] && <div className="error">{errors[field.name]}</div>}
+      {touched[field.name] && errors[field.name] && <div style={{ color: "red" }}>{errors[field.name]}</div>}
     </div>
   );
 }

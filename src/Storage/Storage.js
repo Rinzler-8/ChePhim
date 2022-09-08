@@ -43,7 +43,6 @@ const setUserInfo = (accountLogin) => {
   setItem("id", accountLogin.id);
   setItem("username", accountLogin.username);
   setItem("email", accountLogin.email);
-  setItem("password", accountLogin.password);
   setItem("role", accountLogin.role);
   setItem("status", accountLogin.status);
 };

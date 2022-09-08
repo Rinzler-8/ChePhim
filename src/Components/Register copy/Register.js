@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { Button, Container, Row, Col } from "reactstrap";
+import { Button, Container, Row, Col, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 import { Formik, Field, Form } from "formik";
 import CustomInput from "./CustomInput";
 import * as Yup from "yup";
-import "./../../css/AccountForm.css";
+import "./../../css/Login.css";
 import { Link, useNavigate } from "react-router-dom";
 import { getUsernameExists, getEmailExists } from "../../API/AccountAPI";
 import { addAccountNewAPI } from "../../API/RegisterAPI";
@@ -11,8 +11,12 @@ import { addAccountNewAPI } from "../../API/RegisterAPI";
 function RegisterComponent(props) {
   const [isShown, setIsShown] = useState(false);
   // Quản lý trạng thái ẩn hiện Moadal
+  let [showModal, SetShowModal] = useState(false);
 
   // Xử lý ẩn hiện modal
+  let toggle = () => {
+    SetShowModal(!showModal);
+  };
 
   let navigate = useNavigate();
 
@@ -22,12 +26,12 @@ function RegisterComponent(props) {
 
   return (
     <div className="row">
-      <div className="col " id="col1">
+      <div className="col ">
         <div className="left">
           <img alt="Sample" src={require("../../Assets/Banner/background.jpg")} />
         </div>
       </div>
-      <div className="col " id="col2">
+      <div className="col ">
         <div className="right">
           <Formik
             initialValues={{
@@ -77,6 +81,7 @@ function RegisterComponent(props) {
                   role: values.role,
                 };
                 addAccountNewAPI(accountRegister);
+                SetShowModal(true);
                 // navigate("/login");
               } catch (error) {
                 // alert("Hãy kiểm tra lại thông tin!");
@@ -98,17 +103,16 @@ function RegisterComponent(props) {
                   >
                     <Form>
                       {/* Register */}
-                      <div className="title">
-                        <h3>THAM GIA CHÊ PHIM NGAY</h3>
-                        <hr></hr>
-                      </div>
-                      <div className="title-header">
-                        <h3>ĐĂNG KÝ</h3>
-                        <hr></hr>
-                      </div>
+                      <br />
+                      <br />
+                      <h3>THAM GIA CHÊ PHIM NGAY</h3>
+                      <hr style={{ color: "red", height: "5px" }}></hr>
+                      <h3>Đăng ký</h3>
+                      <hr style={{ color: "red", height: "6px", width: "100px" }}></hr>
                       {/* username */}
+                      <br />
                       <Field className="input" name="username" type="text" placeholder="Nhập Tên Đăng Ký" label="Tên đăng ký:" component={CustomInput} />
-                      <Field className="input" name="email" type="email" placeholder="Nhập email" label="Email:" component={CustomInput} />
+                      <Field className="input" name="email" type="email" placeholder="Nhập email" label="email:" component={CustomInput} />
                       {/* password */}
                       <Field
                         className="input"
@@ -129,15 +133,17 @@ function RegisterComponent(props) {
 
                       {/* Checkbox */}
 
-                      <label className="checkbox">
-                        <Field type="checkbox" name="toggle" checked={isShown} onChange={togglePassword} />
-                        {`Hiện Mật Khẩu`}
-                      </label>
+                      <div className="checkbox-container">
+                        <input id="checkbox" type="checkbox" checked={isShown} onChange={togglePassword} />
+                        <label htmlFor="checkbox">Hiện Mật Khẩu</label>
+                      </div>
 
                       {/* Submit */}
                       <Row className="button">
-                        <Button type="submit">Đăng ký</Button>
-                        <Link to={"/login"} className="link">
+                        <Button color="danger" type="submit">
+                          Đăng ký
+                        </Button>
+                        <Link to={"/login"} style={{ color: "red", paddingTop: "50px" }}>
                           Quay lại
                         </Link>
                       </Row>
@@ -147,6 +153,27 @@ function RegisterComponent(props) {
               </Container>
             )}
           </Formik>
+
+          <Modal isOpen={showModal} toggle={toggle}>
+            {/* header */}
+            <ModalHeader>Đăng ký thành công</ModalHeader>
+
+            {/* body */}
+            <ModalBody className="m-3">
+              <p>Tài khoản của bạn đã đăng ký thành công.</p>
+            </ModalBody>
+
+            {/* footer */}
+            <ModalFooter>
+              <Button color="danger" href={"/login"}>
+                Sang trang đăng nhập
+              </Button>
+
+              <Button color="danger" onClick={toggle}>
+                Đóng
+              </Button>
+            </ModalFooter>
+          </Modal>
         </div>
       </div>
     </div>

@@ -4,6 +4,9 @@ import { checkLoginAPI } from "../API/LoginAPI";
 import storage from "../Storage/Storage";
 import { useNavigate } from "react-router-dom";
 
+// import { useCookies } from 'react-cookie';
+// const [cookies, setCookie] = useCookies(['name']);
+
 function LoginContainer(props) {
   let navigate = useNavigate();
 
@@ -18,11 +21,9 @@ function LoginContainer(props) {
           let accountLoginSaveToStorage = {
             id: response.id,
             username: accountLogin.username,
-            password: accountLogin.password,
             email: response.email,
             role: response.roles,
             status: response.status,
-            token: response.accessToken,
           };
           // Lưu thông tin Account vào LocalStorage để sử dụng về sau
           storage.setUserInfo(accountLoginSaveToStorage);
